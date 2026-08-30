@@ -11,21 +11,54 @@
     <link rel="stylesheet" href="styles.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const container = document.querySelector('.container');
             const navbarLinks = document.querySelectorAll('.navbar a');
+
+            function syncNavbarHeight() {
+                if (!navbar) return;
+                document.documentElement.style.setProperty(
+                    '--navbar-height',
+                    `${navbar.offsetHeight}px`
+                );
+            }
+
+            function getNavContentGap() {
+                if (!container) return 32;
+                return parseFloat(getComputedStyle(container).paddingTop) || 32;
+            }
+
+            function scrollToSection(targetSection, smooth) {
+                if (!targetSection || !navbar) return;
+                syncNavbarHeight();
+                const desiredTop = navbar.offsetHeight + getNavContentGap();
+                const delta = targetSection.getBoundingClientRect().top - desiredTop;
+                window.scrollBy({
+                    top: delta,
+                    behavior: smooth === false ? 'auto' : 'smooth'
+                });
+            }
+
+            syncNavbarHeight();
+            window.addEventListener('resize', syncNavbarHeight);
+
+            if (!location.hash || location.hash.toLowerCase() === '#about') {
+                window.scrollTo(0, 0);
+            } else {
+                const section = document.getElementById(location.hash.slice(1));
+                if (section) {
+                    requestAnimationFrame(function () {
+                        scrollToSection(section, false);
+                    });
+                }
+            }
 
             navbarLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
                     const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    
-		    if (targetSection) {
-                        const yOffset = -100; // Adjust this value if you have a fixed navbar
-                        const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                    }
-
+                    scrollToSection(document.getElementById(targetId));
+                    history.replaceState(null, '', '#' + targetId);
                 });
             });
 
@@ -69,119 +102,168 @@
 
         <div id="Portfolio" class="section">
             <h1>Portfolio</h1>
-            <div class="card card-color" >
-                <h3>SparrowSMS</h3>
-                <p class="project-detail">In this product I worked as a python/django programmer in Janakitech
-                    Pvt. Ltd. since October 2014 to Aug 2019. In this project I
-                    am working to send bulk SMS, scheduled SMS and other sms related api
-                    services. Managing contacts and contact-groups of clients and using them
-                    in bulk-sms module.  I have also work on different module like autoresponder, result,
-                    voting. User sends sms to certain shortcode, our system receives the
-                    message and find the related campaign and sends response according to
-                    the campaign. I have also worked in bulk-email using sendgrid-api. <br/> <a href="https://web.sparrowsms.com" >Project link</a> </p>
-            </div>
-            <div class="card card-color">
-                <h3>Talentadore</h3>
-                <p class="project-detail">Talentadore is a virtual assistant recruitment (VRA) system developed in
-                    flask and MariaDB. I worked here as a senior developer to develop feature
-                    and fix the issues and bugs. The steps to recruit a new employee is
-                    completed managed by this product. All the candidates are get better reply
-                    from this web app.<br/> <a href="https://talentadore.com" >Project link</a> </p>
-            </div>
-            <div class="card card-color">
-                <h3>RegistryDirect</h3>
-                <p class="project-detail">RegistryDirect is a product where multiple shares of an organization are
-                    managed and maintained. I am working in this product in react.js and
-                    python/django technology as a full stack developer. I am working from
-                    Nepal as a remote developer. <br/> <a href="https://registrydirect.com.au" >Project link</a> </p>
-            </div>
-            <div class="card card-color">
-                <h3>Sunya Health</h3>
-                <p class="project-detail">This is a health product managing the data for different medical reports
-                    and patients’ history, this project is targeted only for Nepal. I have worked
-                    in front-end backend and deployment of this project. <br/> <a href="https://sunya.health" >Project link</a> </p>
+            <div class="portfolio-grid">
+                <article class="project-card">
+                    <div class="project-card-top">
+                        <h3>SparrowSMS</h3>
+                        <span class="project-role">Python / Django · 2014–2019</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>Django</span>
+                        <span>Bulk SMS</span>
+                        <span>SendGrid</span>
+                        <span>APIs</span>
+                    </div>
+                    <p class="project-detail">Built and maintained bulk SMS, scheduled messaging, and SMS API services at Janakitech. Worked across contacts, contact-groups, autoresponder, result, voting, and bulk-email modules.</p>
+                    <a class="project-link" href="https://web.sparrowsms.com" target="_blank" rel="noopener noreferrer">View project</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card-top">
+                        <h3>Talentadore</h3>
+                        <span class="project-role">Senior Developer · Flask</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>Flask</span>
+                        <span>MariaDB</span>
+                        <span>Recruitment</span>
+                    </div>
+                    <p class="project-detail">Virtual recruitment assistant (VRA) that guides the full hiring flow. Developed features and fixed bugs so candidates receive clearer, faster responses throughout the process.</p>
+                    <a class="project-link" href="https://talentadore.com" target="_blank" rel="noopener noreferrer">View project</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card-top">
+                        <h3>RegistryDirect</h3>
+                        <span class="project-role">Full Stack · Remote</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>React</span>
+                        <span>Django</span>
+                        <span>Python</span>
+                    </div>
+                    <p class="project-detail">Share registry platform for managing and maintaining organizational holdings. Contributing as a remote full-stack developer with React.js and Python/Django.</p>
+                    <a class="project-link" href="https://registrydirect.com.au" target="_blank" rel="noopener noreferrer">View project</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card-top">
+                        <h3>Sunya Health</h3>
+                        <span class="project-role">Full Stack · Nepal</span>
+                    </div>
+                    <div class="project-tags">
+                        <span>Frontend</span>
+                        <span>Backend</span>
+                        <span>Deployment</span>
+                    </div>
+                    <p class="project-detail">Health platform for medical reports and patient history, focused on Nepal. Worked across front-end, back-end, and deployment end to end.</p>
+                    <a class="project-link" href="https://sunya.health" target="_blank" rel="noopener noreferrer">View project</a>
+                </article>
             </div>
         </div>
 
         <div id="Experience" class="section">
             <h1>Experience</h1>
-            <div class="single-row-display">
-                <div class="card block-card card-color">
-                    <h3>Python Developer (10 years)</h3>
-                    <p><ul>
-                        <li>Django</li>
-                        <li>Django-Rest Framework</li>
-                        <li>Flask</li>
-                    </ul></p>
-                </div>
-                <div class="card block-card card-color">
-                    <h3>React Developer (6 years)</h3>
-                    <p><ul>
-                        <li>React.js</li>
-                        <li>Next.js</li>
-                        <li>Antd (CSS design framework)</li>
-                    </ul></p>
-                </div>
+            <div class="skills-grid">
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>Python</h3>
+                        <span class="skill-years">10 years</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Django</span>
+                        <span>Django REST Framework</span>
+                        <span>Flask</span>
+                    </div>
+                </article>
 
-                
-                <div class="card block-card card-color">
-                    <h3>Database (5 years)</h3>
-                    <p><ul>
-                        <li>Mysql</li>
-                        <li>Postgresql</li>
-                        <li>Mongo</li>
-                        <li>Sqlite</li>
-                    </ul></p>
-                </div>
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>React</h3>
+                        <span class="skill-years">6 years</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span>React.js</span>
+                        <span>Next.js</span>
+                        <span>Ant Design</span>
+                    </div>
+                </article>
 
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>Database</h3>
+                        <span class="skill-years">5 years</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                        <span>MongoDB</span>
+                        <span>SQLite</span>
+                    </div>
+                </article>
+
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>Cloud</h3>
+                        <span class="skill-years">3 years</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span>AWS EC2</span>
+                        <span>AWS S3</span>
+                        <span>AWS Lambda</span>
+                        <span>API Gateway</span>
+                    </div>
+                </article>
+
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>Deployment</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Nginx</span>
+                        <span>Gunicorn</span>
+                        <span>Linux</span>
+                        <span>Shell Scripting</span>
+                    </div>
+                </article>
+
+                <article class="skill-card">
+                    <div class="skill-card-header">
+                        <h3>Caching &amp; Queue</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Redis</span>
+                        <span>RabbitMQ</span>
+                        <span>Celery</span>
+                    </div>
+                </article>
+
+                <article class="skill-card skill-card-wide">
+                    <div class="skill-card-header">
+                        <h3>Soft Skills</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span>Communication — English, Nepali, Hindi</span>
+                        <span>Leadership — 3 projects as team lead</span>
+                        <span>Problem Solving</span>
+                        <span>Logical Reasoning</span>
+                        <span>Creativity</span>
+                        <span>Time Management</span>
+                        <span>Team Collaboration</span>
+                        <span>Mentoring &amp; Coaching</span>
+                        <span>Stakeholder Communication</span>
+                        <span>Remote Collaboration</span>
+                        <span>Code Review</span>
+                        <span>Agile / Scrum</span>
+                        <span>Adaptability</span>
+                        <span>Critical Thinking</span>
+                        <span>Ownership &amp; Accountability</span>
+                        <span>Conflict Resolution</span>
+                        <span>Presentation Skills</span>
+                        <span>Continuous Learning</span>
+                    </div>
+                </article>
             </div>
-            <div class="single-row-display">
-                <div class="card block-card card-color">
-                    <h3>Cloud (3 years)</h3>
-                    <p><ul>
-                        <li>AWS EC2</li>
-                        <li>AWS S3</li>
-                        <li>AWS Lambda</li>
-                        <li>AWS API Gateway</li>
-                    </ul></p>
-                </div>
-
-                <div class="card block-card card-color">
-                    <h3>Deployment</h3>
-                    <p>
-                        <ul>
-                            <li>Nginx</li>
-                            <li>Gunicorn</li>
-                            <li>Linux Basic</li>
-                            <li>Linux Shell Scripting</li>
-                        </ul>
-                    </p>
-                </div>
-
-                <div class="card block-card card-color">
-                    <h3>Caching and Queue</h3>
-                    <p>
-                        <ul>
-                            <li>Reddis</li>
-                            <li>Rabbitmq</li>
-                            <li>celery</li>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="card block-card card-color">
-                <h3>Soft Skills</h3>
-                <p>
-                    <ul>
-                        <li>Communication (English:Fluent, Nepali: Native, Hindi: Proficient)</li>
-                        <li>Leadership (Successfully completed 3 projects as team Lead)</li>
-                        <li>Problem Solving and Logical Reasoning</li>
-                        <li>Creativity</li>
-                        <li>Time Management</li>
-                    </ul>
-                </p>
-            </div>
-                
         </div>
 
         <div id="Hobby" class="section background-image-opacity-hobby">

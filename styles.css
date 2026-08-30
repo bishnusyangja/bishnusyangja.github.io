@@ -404,10 +404,10 @@ body {
     border-radius: var(--radius-xl);
     background: var(--color-navy);
     padding: var(--space-3xl) var(--space-2xl);
-    min-height: 520px;
+    min-height: 780px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     gap: var(--space-2xl);
     color: #ffffff;
 }
@@ -425,7 +425,7 @@ body {
     flex: 0 0 36%;
     width: 36%;
     max-width: 420px;
-    aspect-ratio: 4 / 5;
+    align-self: stretch;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
@@ -494,6 +494,10 @@ body {
     text-align: justify;
     text-justify: inter-word;
     hyphens: auto;
+}
+
+.title-summary + .title-summary {
+    padding-top: var(--space-md);
 }
 
 
@@ -675,6 +679,7 @@ body {
         width: min(100%, 360px);
         max-width: 360px;
         align-self: center;
+        aspect-ratio: 4 / 5;
     }
 
     .background-image-opacity-hobby {

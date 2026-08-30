@@ -29,15 +29,17 @@
                 });
             });
 
-            const textContainer = document.getElementsByClassName('animated-text');
-            const text = textContainer.textContent;
-            textContainer.textContent = '';
+            const textContainer = document.querySelector('.animated-text');
+            if (textContainer) {
+                const text = textContainer.textContent;
+                textContainer.textContent = '';
 
-            for (let i = 0; i < text.length; i++) {
-                const span = document.createElement('span');
-                span.textContent = text[i];
-                span.style.animationDelay = `${i * 0.1}s`; // Adjust the delay as needed
-                textContainer.appendChild(span);
+                for (let i = 0; i < text.length; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+                    span.style.animationDelay = `${i * 0.05}s`;
+                    textContainer.appendChild(span);
+                }
             }
         });
     </script>
@@ -52,12 +54,17 @@
 
     <div class="container">
         <div id="About" class="section background-image-opacity-about">
-            <div class="title-name animated-text typing-animation">Bishnu Bhattarai</div>
-            <div class="heading-quote">Enjoy what I know and explore what I don't know</div>
-            <p class="title-summary">A passionate software engineer with over a decade of hands-on experience crafting scalable web applications. 
-                I thrive at the intersection of clean code and creative problem-solving — whether it's architecting robust backends in Python and Django or building seamless user experiences with React. 
-                Driven by curiosity, I'm constantly expanding my toolkit — not just in technology, but in communication, leadership, and the art of turning complex ideas into elegant solutions. 
-                I take pride in delivering quality work on time, every time.</p>
+            <div class="about-content">
+                <div class="title-name animated-text typing-animation">Bishnu Bhattarai</div>
+                <div class="heading-quote">Enjoy what I know and explore what I don't know</div>
+                <p class="title-summary">A passionate software engineer with over a decade of hands-on experience crafting scalable web applications.
+                    I thrive at the intersection of clean code and creative problem-solving — whether it's architecting robust backends in Python and Django or building seamless user experiences with React.
+                    Driven by curiosity, I'm constantly expanding my toolkit — not just in technology, but in communication, leadership, and the art of turning complex ideas into elegant solutions.
+                    I take pride in delivering quality work on time, every time.</p>
+            </div>
+            <div class="about-image">
+                <img src="profile_bishnu.jpg" alt="Bishnu Bhattarai">
+            </div>
         </div>
 
         <div id="Portfolio" class="section">
@@ -178,18 +185,23 @@
         </div>
 
         <div id="Hobby" class="section background-image-opacity-hobby">
-            <h1>Hobbies</h1>
-            <div class="card">
-                <h3>Swimming</h3>
-                <p>Whenever I have free time and it is summer, I go for swimming which make me refresh and fill with more energy to work again.</p>
+            <div class="hobby-image">
+                <img src="swimming_bishnu.jpg" alt="Bishnu Bhattarai swimming">
             </div>
-            <div class="card">
-                <h3>Hiking and Trekking</h3>
-                <p>I usually have one hiking at least a month and trekking once or twice a year within Nepal. I enjoy being with nature and feel as I am in heaven.</p>
-            </div>
-            <div class="card">
-                <h3>Learning New Skills</h3>
-                <p>I always want to learn new things and learn new technologies to update myself. I enjoy learning not only the technologies but also other soft skills like communication, management skills, healthy lifestyle tricks etc.</p>
+            <div class="hobby-content">
+                <h1>Hobbies</h1>
+                <div class="card">
+                    <h3>Swimming</h3>
+                    <p>Whenever I have free time and it is summer, I go for swimming which make me refresh and fill with more energy to work again.</p>
+                </div>
+                <div class="card">
+                    <h3>Hiking and Trekking</h3>
+                    <p>I usually have one hiking at least a month and trekking once or twice a year within Nepal. I enjoy being with nature and feel as I am in heaven.</p>
+                </div>
+                <div class="card">
+                    <h3>Learning New Skills</h3>
+                    <p>I always want to learn new things and learn new technologies to update myself. I enjoy learning not only the technologies but also other soft skills like communication, management skills, healthy lifestyle tricks etc.</p>
+                </div>
             </div>
         </div>
     </div>

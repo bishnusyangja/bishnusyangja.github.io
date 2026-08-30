@@ -241,31 +241,47 @@ ul li::marker {
     z-index: 1;
     overflow: hidden;
     border-radius: var(--radius-xl);
-    background: linear-gradient(to right, var(--color-navy) 52%, rgba(26, 35, 50, 0.15) 100%);
+    background: var(--color-navy);
     padding: var(--space-3xl) var(--space-2xl);
     min-height: 520px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2xl);
     color: #ffffff;
 }
 
-.background-image-opacity-about::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: url('profile_bishnu.jpg') no-repeat center top;
-    background-size: cover;
-    opacity: 0.55;
-    z-index: -1;
-    transition: opacity var(--transition-smooth);
+.about-content {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 58%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.background-image-opacity-about:hover::before {
-    opacity: 0.6;
+.about-image {
+    flex: 0 0 36%;
+    width: 36%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-navy-dark);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform var(--transition-smooth);
+}
+
+.background-image-opacity-about:hover .about-image img {
+    transform: scale(1.03);
 }
 
 .title-name {
@@ -275,44 +291,46 @@ ul li::marker {
     color: #ffffff;
     background: none;
     -webkit-text-fill-color: #ffffff;
-    max-width: 55%;
+    max-width: 100%;
 }
 
 .typing-animation {
-    padding-top: var(--space-xl);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 3s steps(30, end);
+    padding-top: 0;
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    display: block;
+    white-space: normal;
+    overflow: visible;
+    line-height: 1.15;
+    word-break: break-word;
 }
 
 .typing-animation span {
     display: inline-block;
     opacity: 0;
-    animation: fadeIn 0.8s forwards;
+    animation: fadeIn 0.6s forwards;
 }
 
 .heading-quote {
-    line-height: 1.8;
-    font-size: 1.15rem;
+    line-height: 1.7;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--color-gold-light);
     margin-top: var(--space-md);
     letter-spacing: 0.01em;
     font-style: italic;
     opacity: 0.95;
-    max-width: 55%;
+    max-width: 100%;
 }
 
 .title-summary {
     padding-top: var(--space-lg);
+    margin: 0;
     font-style: italic;
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.9;
-    max-width: 55%;
-    text-align: justify;
+    font-size: 1.02rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.85;
+    max-width: 100%;
+    text-align: left;
 }
 
 
@@ -322,41 +340,66 @@ ul li::marker {
     z-index: 1;
     overflow: hidden;
     border-radius: var(--radius-xl);
-    background: linear-gradient(to left, var(--color-navy) 40%, rgba(26, 35, 50, 0.3) 100%);
+    background: var(--color-navy);
+    padding: var(--space-3xl) var(--space-2xl);
+    min-height: 520px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2xl);
     color: #ffffff;
 }
 
-.background-image-opacity-hobby::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 60%;
-    height: 100%;
-    background: url('swimming_bishnu.jpg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.55;
-    z-index: -1;
-    transition: opacity var(--transition-smooth);
+.hobby-image {
+    flex: 0 0 36%;
+    width: 36%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-navy-dark);
 }
 
-.background-image-opacity-hobby:hover::before {
-    opacity: 0.65;
+.hobby-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transition: transform var(--transition-smooth);
+}
+
+.background-image-opacity-hobby:hover .hobby-image img {
+    transform: scale(1.03);
+}
+
+.hobby-content {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 58%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .background-image-opacity-hobby .card {
-    background: rgba(26, 35, 50, 0.7);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    max-width: 55%;
-    margin-left: auto;
+    max-width: 100%;
+    margin-left: 0;
     border-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.85);
 }
 
+.background-image-opacity-hobby .card:last-child {
+    margin-bottom: 0;
+}
+
 .background-image-opacity-hobby h1 {
-    text-align: right;
-    display: block;
+    text-align: left;
+    display: inline-block;
     color: #ffffff;
     border-bottom-color: var(--color-gold);
 }
@@ -446,6 +489,47 @@ ul li::marker {
 
 
 /* ===== Responsive ===== */
+@media (max-width: 960px) {
+    .background-image-opacity-about {
+        flex-direction: column;
+        gap: var(--space-xl);
+        min-height: auto;
+        text-align: left;
+    }
+
+    .about-content {
+        max-width: 100%;
+        order: 1;
+    }
+
+    .about-image {
+        order: 0;
+        flex: 0 0 auto;
+        width: min(100%, 360px);
+        max-width: 360px;
+        align-self: center;
+    }
+
+    .background-image-opacity-hobby {
+        flex-direction: column;
+        gap: var(--space-xl);
+        min-height: auto;
+    }
+
+    .hobby-content {
+        max-width: 100%;
+        order: 1;
+    }
+
+    .hobby-image {
+        order: 0;
+        flex: 0 0 auto;
+        width: min(100%, 360px);
+        max-width: 360px;
+        align-self: center;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar {
         gap: 0;
@@ -475,18 +559,18 @@ ul li::marker {
     }
 
     .typing-animation {
-        font-size: clamp(1.8rem, 8vw, 3rem);
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
     }
 
     .background-image-opacity-about {
-        min-height: 400px;
         padding: var(--space-xl) var(--space-md);
-        background: linear-gradient(to bottom, var(--color-navy) 30%, rgba(26, 35, 50, 0.85) 100%);
+        gap: var(--space-lg);
     }
 
-    .background-image-opacity-about::before {
+    .about-image {
         width: 100%;
-        opacity: 0.35;
+        max-width: 100%;
+        aspect-ratio: 16 / 10;
     }
 
     .title-name,
@@ -496,11 +580,18 @@ ul li::marker {
     }
 
     .background-image-opacity-hobby {
-        background: linear-gradient(to bottom, rgba(26, 35, 50, 0.4) 0%, var(--color-navy) 100%);
+        padding: var(--space-xl) var(--space-md);
+        gap: var(--space-lg);
     }
 
-    .background-image-opacity-hobby::before {
+    .hobby-image {
         width: 100%;
+        max-width: 100%;
+        aspect-ratio: 16 / 10;
+    }
+
+    .hobby-content {
+        max-width: 100%;
     }
 
     .background-image-opacity-hobby .card {

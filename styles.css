@@ -364,7 +364,7 @@ body {
 }
 
 .soft-skills h2 {
-    margin: 0 0 var(--space-md);
+    margin: 0 0 var(--space-lg);
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--color-navy);
@@ -374,12 +374,96 @@ body {
     display: inline-block;
 }
 
+.soft-skills-major {
+    list-style: none;
+    margin: 0 0 var(--space-xl);
+    padding: 0;
+    max-width: 58rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.soft-skills-major li {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    column-gap: var(--space-lg);
+    align-items: baseline;
+    padding: var(--space-md) 0 var(--space-md) 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+}
+
+.soft-skills-major li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.2rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-gold);
+}
+
+.soft-skills-major h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+}
+
+.soft-skills-major p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
 .soft-skills-body {
     margin: 0;
     max-width: 58rem;
     font-size: 0.98rem;
     line-height: 1.9;
-    color: var(--color-text);
+    color: var(--color-text-muted);
+}
+
+
+/* ===== Education ===== */
+.education-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.education-item {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    column-gap: var(--space-2xl);
+    align-items: baseline;
+    padding: var(--space-xl) 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.education-dates {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.education-body h3 {
+    margin: 0 0 var(--space-xs);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+}
+
+.education-school {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
 }
 
 
@@ -627,7 +711,8 @@ body {
 
 #Portfolio { animation-delay: 0.1s; }
 #Experience { animation-delay: 0.2s; }
-#Hobby { animation-delay: 0.3s; }
+#Education { animation-delay: 0.3s; }
+#Hobby { animation-delay: 0.4s; }
 
 
 /* ===== Responsive ===== */
@@ -658,6 +743,17 @@ body {
 
     .skill-tools {
         grid-column: 1 / -1;
+    }
+
+    .education-item {
+        grid-template-columns: 1fr;
+        row-gap: var(--space-xs);
+    }
+
+    .soft-skills-major li {
+        grid-template-columns: 1fr;
+        row-gap: var(--space-xs);
+        padding-left: 1.15rem;
     }
 
     .background-image-opacity-about {
@@ -708,11 +804,12 @@ body {
     .navbar {
         gap: 0;
         padding: var(--space-sm) 0;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
     }
 
     .navbar a {
-        padding: var(--space-sm) var(--space-md);
+        padding: var(--space-sm) 0.7rem;
     }
 
     .container {
@@ -783,6 +880,14 @@ body {
 }
 
 @media (max-width: 480px) {
+    .navbar {
+        font-size: 0.78rem;
+    }
+
+    .navbar a {
+        padding: var(--space-sm) 0.45rem;
+    }
+
     .section {
         padding: var(--space-lg) var(--space-md);
     }

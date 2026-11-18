@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bishnu Bhattarai — Software Engineer with 10 years of experience in Python, Django, React.js, and cloud technologies.">
+    <meta name="description" content="Bishnu Bhattarai — Software Engineer with 12+ years of experience in Python, Django, React.js, and cloud technologies.">
     <title>Bishnu Bhattarai - Software Engineer</title>
-    <meta name="theme-color" content="#1a2332">
-    <link rel="icon" href="bishnu_profile.ico" sizes="any">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#1a2332">
+    <meta name="theme-color" content="#560d18">
+    <link rel="icon" href="bishnu_favicon.ico" sizes="any">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#560d18">
     <link rel="manifest" href="site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +66,23 @@
                 });
             });
 
+            const sections = Array.from(document.querySelectorAll('.nav-links a'))
+                .map(a => [a, document.getElementById(a.getAttribute('href').slice(1))])
+                .filter(([, s]) => s);
+            function updateActive() {
+                const line = navbar.offsetHeight + window.innerHeight * 0.3;
+                let current = sections[0];
+                sections.forEach(pair => {
+                    if (pair[1].getBoundingClientRect().top <= line) current = pair;
+                });
+                if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+                    current = sections[sections.length - 1];
+                }
+                sections.forEach(([a]) => a.classList.toggle('active', a === current[0]));
+            }
+            updateActive();
+            window.addEventListener('scroll', updateActive, { passive: true });
+
             const textContainer = document.querySelector('.animated-text');
             if (textContainer) {
                 const text = textContainer.textContent;
@@ -83,192 +99,300 @@
     </script>
 </head>
 <body>
-    <div class="navbar">
-        <a href="#About">About</a>
-        <a href="#Projects">Projects</a>
-        <a href="#Experience">Experience</a>
-        <a href="#Education">Education</a>
-        <a href="#Hobby">Hobby</a>
-    </div>
+    <nav class="navbar">
+        <a class="brand" href="#About" aria-label="Back to top"><img src="bishnu_favicon.ico" alt="Bishnu Bhattarai"></a>
+        <div class="nav-links">
+            <a href="#About">About</a>
+            <a href="#Projects">Projects</a>
+            <a href="#OpenSource">Open Source</a>
+            <a href="#Skills">Skills</a>
+            <a href="#SoftSkills">Soft Skills</a>
+            <a href="#Education">Education</a>
+            <a href="#Hobby">Hobby</a>
+        </div>
+    </nav>
 
-    <div class="container">
-        <div id="About" class="section background-image-opacity-about">
+    <main class="container">
+        <section id="About" class="section hero">
             <div class="about-content">
+                <span class="hero-badge">Software Engineer · 12+ years</span>
                 <div class="title-name animated-text typing-animation">Bishnu Bhattarai</div>
                 <div class="heading-quote">Enjoy what I know and explore what I don't know</div>
-                <p class="title-summary">A passionate software engineer with over a decade of hands-on experience crafting scalable web applications.
-                    I thrive at the intersection of clean code and creative problem-solving, and I take pride in delivering quality work on time, every time.</p>
-                <p class="title-summary">On the technical side, I have spent ten years building with Python — Django, Django REST Framework, and Flask — and six years shaping user interfaces with React.js, Next.js, and Ant Design.
-                    I work across MySQL, PostgreSQL, MongoDB, and SQLite, and I deploy and operate services on AWS EC2, S3, Lambda, and API Gateway with Nginx, Gunicorn, Linux, and shell scripting.
-                    For systems that need to stay fast under load, I rely on Redis, RabbitMQ, and Celery to keep background work reliable.</p>
-                <p class="title-summary">Soft skills are how that work actually ships. I communicate in English, Nepali, and Hindi, and I have led three projects as team lead — mentoring, coaching, and running code reviews in Agile and Scrum teams.
-                    I care about stakeholder communication, remote collaboration, time management, and turning complex ideas into clear decisions.
-                    Problem-solving, logical reasoning, creativity, adaptability, and ownership shape how I work day to day, along with presentation skills, conflict resolution, and a habit of continuous learning.</p>
+                <p class="title-summary">Software engineer with 12+ years of experience building scalable, reliable web applications, with Python and Django at the core of my work for all of those years.
+                    I work across the full stack — APIs, databases, React.js front ends, and AWS deployments — and have shipped products for SMS messaging, recruitment, share registry, and healthcare.
+                    I have led three projects as team lead, mentor developers through code reviews, and collaborate daily with remote teams across Nepal, Australia, and Finland, delivering quality work on time.</p>
+                <ul class="hero-stats">
+                    <li><strong>12+</strong><span>Years experience</span></li>
+                    <li><strong>3</strong><span>Projects as team lead</span></li>
+                    <li><strong>3</strong><span>Countries, remote teams</span></li>
+                </ul>
             </div>
             <div class="about-image">
                 <img src="profile_bishnu.jpg" alt="Bishnu Bhattarai">
+                <span class="photo-tag"><strong>12+</strong> years with Python</span>
             </div>
-        </div>
+        </section>
 
-        <div id="Projects" class="section">
-            <h1>Projects</h1>
+        <section id="Projects" class="section">
+            <div class="section-head">
+                <span class="eyebrow">Selected work</span>
+                <h1>Projects</h1>
+            </div>
             <ol class="project-list">
                 <li class="project-item">
                     <div class="project-heading">
-                        <h3>
-                            <a href="https://web.sparrowsms.com" target="_blank" rel="noopener noreferrer">SparrowSMS</a>
-                        </h3>
+                        <h3><a href="https://web.sparrowsms.com" target="_blank" rel="noopener noreferrer">SparrowSMS</a></h3>
                         <span class="project-role">Python / Django · 2014–2019</span>
                     </div>
                     <p class="project-detail">Built and maintained bulk SMS, scheduled messaging, and SMS API services at Janakitech. Worked across contacts, contact-groups, autoresponder, result, voting, and bulk-email modules.</p>
-                    <p class="project-stack">Django · Bulk SMS · SendGrid · APIs</p>
+                    <ul class="chips"><li>Django</li><li>Bulk SMS</li><li>SendGrid</li><li>APIs</li></ul>
+                    <a class="project-link" href="https://web.sparrowsms.com" target="_blank" rel="noopener noreferrer">Visit website <span aria-hidden="true">→</span></a>
                 </li>
-
                 <li class="project-item">
                     <div class="project-heading">
-                        <h3>
-                            <a href="https://talentadore.com" target="_blank" rel="noopener noreferrer">Talentadore</a>
-                        </h3>
+                        <h3><a href="https://talentadore.com" target="_blank" rel="noopener noreferrer">Talentadore</a></h3>
                         <span class="project-role">Senior Developer · Flask</span>
                     </div>
                     <p class="project-detail">Virtual recruitment assistant (VRA) that guides the full hiring flow. Developed features and fixed bugs so candidates receive clearer, faster responses throughout the process.</p>
-                    <p class="project-stack">Flask · MariaDB · Recruitment</p>
+                    <ul class="chips"><li>Flask</li><li>MariaDB</li><li>Recruitment</li></ul>
+                    <a class="project-link" href="https://talentadore.com" target="_blank" rel="noopener noreferrer">Visit website <span aria-hidden="true">→</span></a>
                 </li>
-
                 <li class="project-item">
                     <div class="project-heading">
-                        <h3>
-                            <a href="https://registrydirect.com.au" target="_blank" rel="noopener noreferrer">RegistryDirect</a>
-                        </h3>
+                        <h3><a href="https://registrydirect.com.au" target="_blank" rel="noopener noreferrer">RegistryDirect</a></h3>
                         <span class="project-role">Full Stack · Remote</span>
                     </div>
                     <p class="project-detail">Share registry platform for managing and maintaining organizational holdings. Contributing as a remote full-stack developer with React.js and Python/Django.</p>
-                    <p class="project-stack">React · Django · Python</p>
+                    <ul class="chips"><li>React</li><li>Django</li><li>Python</li></ul>
+                    <a class="project-link" href="https://registrydirect.com.au" target="_blank" rel="noopener noreferrer">Visit website <span aria-hidden="true">→</span></a>
                 </li>
-
                 <li class="project-item">
                     <div class="project-heading">
-                        <h3>
-                            <a href="https://sunya.health" target="_blank" rel="noopener noreferrer">Sunya Health</a>
-                        </h3>
+                        <h3><a href="https://sunya.health" target="_blank" rel="noopener noreferrer">Sunya Health</a></h3>
                         <span class="project-role">Full Stack · Nepal</span>
                     </div>
                     <p class="project-detail">Health platform for medical reports and patient history, focused on Nepal. Worked across front-end, back-end, and deployment end to end.</p>
-                    <p class="project-stack">Frontend · Backend · Deployment</p>
+                    <ul class="chips"><li>Frontend</li><li>Backend</li><li>Deployment</li></ul>
+                    <a class="project-link" href="https://sunya.health" target="_blank" rel="noopener noreferrer">Visit website <span aria-hidden="true">→</span></a>
                 </li>
             </ol>
-        </div>
+        </section>
 
-        <div id="Experience" class="section">
-            <h1>Experience</h1>
-            <div class="skill-list">
-                <div class="skill-row">
-                    <h3>Python</h3>
-                    <span class="skill-years">10 years</span>
+        <section id="OpenSource" class="section">
+            <div class="section-head">
+                <span class="eyebrow">Giving back</span>
+                <h1>Open Source Contributions</h1>
+            </div>
+            <ul class="oss-grid">
+                <li class="oss-card">
+                    <div class="oss-top">
+                        <span class="soft-icon oss-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg></span>
+                        <span class="oss-kind">Feature</span>
+                    </div>
+                    <p class="oss-pkg">django-tenants <span>#1265</span></p>
+                    <h3>Clone each tenant type from its own template schema</h3>
+                    <a class="project-link" href="https://github.com/django-tenants/django-tenants/pull/1265" target="_blank" rel="noopener noreferrer">View pull request <span aria-hidden="true">→</span></a>
+                </li>
+                <li class="oss-card">
+                    <div class="oss-top">
+                        <span class="soft-icon oss-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg></span>
+                        <span class="oss-kind">Docs</span>
+                    </div>
+                    <p class="oss-pkg">django-tenants <span>#1266</span></p>
+                    <h3>Docs for using django-tenants in a secure manner</h3>
+                    <a class="project-link" href="https://github.com/django-tenants/django-tenants/pull/1266" target="_blank" rel="noopener noreferrer">View pull request <span aria-hidden="true">→</span></a>
+                </li>
+                <li class="oss-card">
+                    <div class="oss-top">
+                        <span class="soft-icon oss-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg></span>
+                        <span class="oss-kind">Website</span>
+                    </div>
+                    <p class="oss-pkg">djangoproject.com <span>#2111</span></p>
+                    <h3>Added GitHub minutes repo link</h3>
+                    <a class="project-link" href="https://github.com/django/djangoproject.com/pull/2111" target="_blank" rel="noopener noreferrer">View pull request <span aria-hidden="true">→</span></a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="Skills" class="section">
+            <div class="section-head">
+                <span class="eyebrow">What I work with</span>
+                <h1>Technical Skills</h1>
+            </div>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <div class="skill-top"><h3>Python</h3><span class="skill-years">12 yrs</span></div>
                     <p class="skill-tools">Django · Django REST Framework · Flask</p>
+                    <div class="skill-level" role="img" aria-label="Expert: 5 out of 5">
+                        <span class="level-bar"><span style="--level:5"></span></span>
+                        <span class="level-label">Expert</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <h3>React</h3>
-                    <span class="skill-years">6 years</span>
+                <div class="skill-card">
+                    <div class="skill-top"><h3>React</h3><span class="skill-years">6 yrs</span></div>
                     <p class="skill-tools">React.js · Next.js · Ant Design</p>
+                    <div class="skill-level" role="img" aria-label="Advanced: 4 out of 5">
+                        <span class="level-bar"><span style="--level:4"></span></span>
+                        <span class="level-label">Advanced</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <h3>Database</h3>
-                    <span class="skill-years">5 years</span>
+                <div class="skill-card">
+                    <div class="skill-top"><h3>Database</h3><span class="skill-years">5 yrs</span></div>
                     <p class="skill-tools">MySQL · PostgreSQL · MongoDB · SQLite</p>
+                    <div class="skill-level" role="img" aria-label="Advanced: 4 out of 5">
+                        <span class="level-bar"><span style="--level:4"></span></span>
+                        <span class="level-label">Advanced</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <h3>Cloud</h3>
-                    <span class="skill-years">3 years</span>
-                    <p class="skill-tools">AWS EC2 · AWS S3 · AWS Lambda · API Gateway</p>
-                </div>
-                <div class="skill-row">
-                    <h3>Deployment</h3>
+                <div class="skill-card">
+                    <div class="skill-top"><h3>Deployment</h3></div>
                     <p class="skill-tools">Nginx · Gunicorn · Linux · Shell Scripting</p>
+                    <div class="skill-level" role="img" aria-label="Advanced: 4 out of 5">
+                        <span class="level-bar"><span style="--level:4"></span></span>
+                        <span class="level-label">Advanced</span>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <h3>Caching &amp; Queue</h3>
+                <div class="skill-card">
+                    <div class="skill-top"><h3>Caching &amp; Queue</h3></div>
                     <p class="skill-tools">Redis · RabbitMQ · Celery</p>
+                    <div class="skill-level" role="img" aria-label="Proficient: 3 out of 5">
+                        <span class="level-bar"><span style="--level:3"></span></span>
+                        <span class="level-label">Proficient</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-top"><h3>Cloud</h3><span class="skill-years">3 yrs</span></div>
+                    <p class="skill-tools">AWS EC2 · AWS S3 · AWS Lambda · API Gateway</p>
+                    <div class="skill-level" role="img" aria-label="Proficient: 3 out of 5">
+                        <span class="level-bar"><span style="--level:3"></span></span>
+                        <span class="level-label">Proficient</span>
+                    </div>
                 </div>
             </div>
-            <div class="soft-skills">
-                <h2>Soft Skills</h2>
-                <ul class="soft-skills-major">
-                    <li>
-                        <h3>Communication</h3>
-                        <p>English (fluent), Nepali (native), and Hindi (proficient) — used daily with teams and stakeholders.</p>
-                    </li>
-                    <li>
-                        <h3>Leadership</h3>
-                        <p>Led three projects as team lead, including a 4-developer health platform and an 8-developer hotel booking system.</p>
-                    </li>
-                    <li>
-                        <h3>Mentoring &amp; Coaching</h3>
-                        <p>Help juniors through blockers, run code reviews, and keep the team moving on remote work.</p>
-                    </li>
-                    <li>
-                        <h3>Problem Solving</h3>
-                        <p>Design APIs and databases, and work through complex backend problems so systems stay scalable and responsive.</p>
-                    </li>
-                    <li>
-                        <h3>Remote Collaboration</h3>
-                        <p>Work with distributed teams across Nepal, Australia, and Finland, with clear updates and shared ownership.</p>
-                    </li>
-                </ul>
-                <p class="soft-skills-body">Around that, I rely on time management, stakeholder communication, and Agile / Scrum to keep delivery predictable. Adaptability, conflict resolution, and presentation skills help when plans change. Logical reasoning, creativity, critical thinking, and continuous learning are how I pick up new tools and keep raising the quality of the work.</p>
-            </div>
-        </div>
+        </section>
 
-        <div id="Education" class="section">
-            <h1>Education</h1>
+        <section id="SoftSkills" class="section">
+            <div class="section-head">
+                <span class="eyebrow">How I work</span>
+                <h1>Soft Skills</h1>
+            </div>
+            <ul class="soft-grid">
+                <li class="soft-card">
+                    <span class="soft-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+                    <h3>Communication</h3>
+                    <p>English (fluent), Nepali (native), and Hindi (proficient) — used daily with teams and stakeholders.</p>
+                </li>
+                <li class="soft-card">
+                    <span class="soft-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+                    <h3>Leadership</h3>
+                    <p>Led three projects as team lead, including a 4-developer health platform and an 8-developer hotel booking system.</p>
+                </li>
+                <li class="soft-card">
+                    <span class="soft-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                    <h3>Mentoring &amp; Coaching</h3>
+                    <p>Help juniors through blockers, run code reviews, and keep the team moving on remote work.</p>
+                </li>
+                <li class="soft-card">
+                    <span class="soft-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                    <h3>Problem Solving</h3>
+                    <p>Design APIs and databases, and work through complex backend problems so systems stay scalable and responsive.</p>
+                </li>
+                <li class="soft-card">
+                    <span class="soft-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+                    <h3>Remote Collaboration</h3>
+                    <p>Work with distributed teams across Nepal, Australia, and Finland, with clear updates and shared ownership.</p>
+                </li>
+                <li class="soft-card soft-card-more">
+                    <h3>And every day</h3>
+                    <ul class="chips chips-light">
+                        <li>Time Management</li><li>Stakeholder Communication</li><li>Agile / Scrum</li>
+                        <li>Adaptability</li><li>Conflict Resolution</li><li>Presentation</li>
+                        <li>Logical Reasoning</li><li>Creativity</li><li>Critical Thinking</li><li>Continuous Learning</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+
+        <section id="Education" class="section">
+            <div class="section-head">
+                <span class="eyebrow">Academic background</span>
+                <h1>Education</h1>
+            </div>
             <div class="education-list">
                 <article class="education-item">
                     <span class="education-dates">Apr 2020 – Feb 2023</span>
-                    <div class="education-body">
-                        <h3>Masters in Computer Science</h3>
-                        <p class="education-school">Tribhuvan University · Central Campus</p>
-                    </div>
+                    <h3>Masters in Computer Science</h3>
+                    <p class="education-school">Tribhuvan University · Central Campus</p>
                 </article>
                 <article class="education-item">
                     <span class="education-dates">Nov 2009 – Dec 2013</span>
-                    <div class="education-body">
-                        <h3>Bachelor in Computer Engineering</h3>
-                        <p class="education-school">Tribhuvan University IOE · Pulchowk Campus</p>
-                    </div>
+                    <h3>Bachelor in Computer Engineering</h3>
+                    <p class="education-school">Tribhuvan University IOE · Pulchowk Campus</p>
                 </article>
             </div>
-        </div>
+        </section>
 
-        <div id="Hobby" class="section background-image-opacity-hobby">
+        <section id="Hobby" class="section hobby">
             <div class="hobby-image">
                 <img src="swimming_bishnu.jpg" alt="Bishnu Bhattarai swimming">
+                <span class="hobby-tag">Off the keyboard</span>
             </div>
             <div class="hobby-content">
+                <span class="eyebrow eyebrow-light">Beyond the code</span>
                 <h1>Hobbies</h1>
-                <div class="card">
-                    <h3>Swimming</h3>
-                    <p>Whenever I have free time and it is summer, I go for swimming which make me refresh and fill with more energy to work again.</p>
-                </div>
-                <div class="card">
-                    <h3>Hiking and Trekking</h3>
-                    <p>I usually have one hiking at least a month and trekking once or twice a year within Nepal. I enjoy being with nature and feel as I am in heaven.</p>
-                </div>
-                <div class="card">
-                    <h3>Learning New Skills</h3>
-                    <p>I always want to learn new things and learn new technologies to update myself. I enjoy learning not only the technologies but also other soft skills like communication, management skills, healthy lifestyle tricks etc.</p>
+                <p class="hobby-intro">What keeps me refreshed, curious, and full of energy for the next problem.</p>
+                <ul class="hobby-list">
+                    <li class="card">
+                        <span class="hobby-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 15c1.7 0 1.7-1.5 3.3-1.5S7 15 8.7 15s1.7-1.5 3.3-1.5 1.7 1.5 3.3 1.5 1.7-1.5 3.4-1.5S20.3 15 22 15"/><path d="M2 20c1.7 0 1.7-1.5 3.3-1.5S7 20 8.7 20s1.7-1.5 3.3-1.5 1.7 1.5 3.3 1.5 1.7-1.5 3.4-1.5S20.3 20 22 20"/><circle cx="16" cy="5" r="2"/><path d="M6 11l4-4 3 3"/></svg></span>
+                        <div>
+                            <span class="hobby-meta">Every summer</span>
+                            <h3>Swimming</h3>
+                            <p>Whenever I have free time and it is summer, I go for swimming which make me refresh and fill with more energy to work again.</p>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <span class="hobby-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l6-11 4 6 2.5-3.5L21 20z"/><circle cx="17" cy="5" r="1.8"/></svg></span>
+                        <div>
+                            <span class="hobby-meta">Monthly hikes · yearly treks</span>
+                            <h3>Hiking and Trekking</h3>
+                            <p>I usually have one hiking at least a month and trekking once or twice a year within Nepal. I enjoy being with nature and feel as I am in heaven.</p>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <span class="hobby-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+                        <div>
+                            <span class="hobby-meta">Always</span>
+                            <h3>Learning New Skills</h3>
+                            <p>I always want to learn new things and learn new technologies to update myself. I enjoy learning not only the technologies but also other soft skills like communication, management skills, healthy lifestyle tricks etc.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-intro">
+                <h2>Let's work together</h2>
+                <p>Bishnu Bhattarai was born in Galyang-01, Syangja Nepal.</p>
+            </div>
+            <div class="footer-contact">
+                <p class="footer-emails">
+                    <span class="footer-email-icon"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                    <a href="mailto:bishnusyangja@gmail.com">bishnusyangja@gmail.com</a>
+                    <span class="sep" aria-hidden="true">·</span>
+                    <a href="mailto:bishnuisnotgod@gmail.com">bishnuisnotgod@gmail.com</a>
+                </p>
+                <div class="social">
+                    <a class="btn btn-primary footer-resume" href="resume.pdf"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Resume</a>
+                    <a href="https://linkedin.com/in/bishnusyangja/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                    <a href="https://github.com/bishnusyangja/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        <p class="footer-detail">Bishnu Bhattarai was born in Galyang-01, Syangja Nepal. 
-            <br/>Contact Email : bishnusyangja@gmail.com, bishnuisnotgod@gmail.com <br/>
-            Linkedin Contact: <a href="https://linkedin.com/in/bishnusyangja/"> linkedin</a> <br/>
-            Github Contact: <a href="https://github.com/bishnusyangja/"> Github</a> <br/>
-            Resume_Bishnu_Bhattarai: <a href="resume.pdf">Download</a> <br/>
-        </p>
-    </div>
+        <p class="footer-copy">© Bishnu Bhattarai</p>
+    </footer>
 </body>
 </html>
-
